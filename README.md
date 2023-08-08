@@ -1,5 +1,5 @@
 # spoti_disco
-Lighting adapting to spotify playback
+Lighting synced to spotify playback, powered by spotify audio analysis
 
 ## Currently supported smart light systems
 - Yeelight
