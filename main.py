@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import random
@@ -5,9 +6,17 @@ import time
 import spotipy
 import yeelight
 
-bulb = yeelight.Bulb(os.getenv('BULB_IP'))
+with open("config.json") as config_json:
+    config = json.load(config_json)
+bulb = config['yeelight_bulb_ip']
 scope = "user-read-playback-state user-read-playback-position"
-sp = spotipy.Spotify(auth_manager=spotipy.SpotifyOAuth(scope=scope, open_browser=False))
+sp = spotipy.Spotify(auth_manager=spotipy.SpotifyOAuth(
+    scope=scope,
+    client_id=config['spotify']['client_id'],
+    client_secret=config['spotify']['client_secret'],
+    redirect_uri=config['spotify']['redirect_uri'],
+    open_browser=False
+))
 colors = [(0, 31, 63),
           (8, 51, 88),
           (13, 99, 165),
